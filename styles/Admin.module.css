@@ -1,0 +1,46 @@
+
+.main {
+  min-height: 100vh;
+}
+
+.shown {
+  background-color: palegreen;
+}
+
+.hidden {
+  background-color: #ffabab;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  text-align: center;
+}
+
+.button {
+  flex: 1;
+  margin: 5px;
+  padding: 20px;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+
+.button.question {
+  font-size: 1.4rem;
+  font-weight: bolder;
+}
+
+.button.answer {
+  font-size: 1.4rem;
+  text-align: left;
+}
+
+.button.wrong {
+  background-color: #ff5e5e;
+}
+
+.addPoints {
+  background-color: #ff9900;
+}
