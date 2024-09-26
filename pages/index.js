@@ -70,7 +70,7 @@ const Home = () => {
             </div>
             }
             <div>
-                <div className={clsx(styles.scoreBoard, styles.team, styles.team1, styles.box)}>
+                <div className={clsx(styles.scoreBoard, styles.team, styles.team1, styles.box, state.teamOnTurn === 0 && styles.active)}>
                     <div>
                         {state.teams[0].name}
                     </div>
@@ -78,7 +78,7 @@ const Home = () => {
                         {state.teams[0].score}
                     </div>
                 </div>
-                <div className={clsx(styles.scoreBoard, styles.team, styles.team2, styles.box)}>
+                <div className={clsx(styles.scoreBoard, styles.team, styles.team2, styles.box, state.teamOnTurn === 1 && styles.active)}>
                     <div>
                         {state.teams[1].name}
                     </div>

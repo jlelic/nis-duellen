@@ -16,6 +16,7 @@ const emptyTeam = {
 const emptyState = {
     questionNum: 0,
     teamOnTurn: 0,
+    buzzerOpened: false,
     bank: 0,
     teams: [
         { ...emptyTeam },
@@ -67,6 +68,7 @@ const SocketHandler = (req, res) => {
 
             socket.on('set-team-turn', teamId => {
                 state.teamOnTurn = teamId
+                state.buzzerOpened = false;
                 updateState()
             })
 
@@ -77,9 +79,14 @@ const SocketHandler = (req, res) => {
                 updateState()
             })
 
+            socket.on('set-buzzer', opened => {
+                console.log('set-buzzer', opened)
+                state.buzzerOpened = opened
+                updateState()
+            })
+
             socket.on('show-question', questionId => {
                 state.questionNum = questionId
-                state.teamOnTurn = -1
                 state.questions[questionId].showQuestion = !state.questions[questionId].showQuestion
                 updateState()
             })

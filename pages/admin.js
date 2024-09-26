@@ -45,6 +45,11 @@ const Admin = () => {
     }
     const questionNum = state.questionNum
 
+    const toggleBuzzer = () => {
+        console.log('toggle')
+        socket.emit('set-buzzer', !state.buzzerOpened)
+    }
+
     const showQuestion = () => {
         socket.emit('show-question', questionNum)
     }
@@ -95,14 +100,11 @@ const Admin = () => {
     return (
         <div className={clsx(styles.main)}>
             <div>
-                {
-                    !questionState.showQuestion &&
-                    <div>
-                        <div className={clsx(styles.button)} onClick={() => showQuestion()}>
-                            OPEN BUZZER
-                        </div>
+                <div>
+                    <div className={clsx(styles.button)} onClick={() => toggleBuzzer()}>
+                        {state.buzzerOpened ? 'RESET' : 'OPEN'} BUZZER
                     </div>
-                }
+                </div>
                 <div className={styles.group}>
                     <div
                         className={clsx(styles.button, styles.team, state.teamOnTurn === 0 ? styles.shown : styles.hidden)}

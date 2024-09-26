@@ -11,7 +11,7 @@ let socket
 
 const Admin = () => {
     const [state, setState] = useState()
-    const [buzzed, setBuzzed] = useState()
+    const [buzzed, setBuzzed] = useState() 
     const [winner, setWinner] = useState('')
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const Admin = () => {
 
         socket.on('set-state', msg => {
             setState(msg)
-            if (!msg.questions[msg.questionNum].showQuestion) {
+            if (!msg.teamOnTurn >= 0) {
                 setBuzzed(false)
             }
             console.log(msg)
@@ -39,7 +39,6 @@ const Admin = () => {
         return <div>Loading...</div>
     }
 
-    const open = state.questions[state.questionNum].showQuestion
 
     const buzz = (team) => {
         if (buzzed) {
@@ -50,13 +49,14 @@ const Admin = () => {
         socket.emit('set-team-turn', team)
     }
 
-    if (buzzed) {
+    console.log(buzzed)
+    if (state.teamOnTurn >= 0) {
         return <div className={clsx(styles.full, state.teamOnTurn == 0 ? styles.team1 : styles.team2)}>
             {state.teamOnTurn == 0 ? '◄' : '►'}
             {state.teams[winner].name}
             {state.teamOnTurn == 0 ? '◄' : '►'}
         </div>
-    } else if (open) {
+    } else if (state.buzzerOpened) {
         return <div className={clsx(styles.main)}>
             <div
                 className={clsx(styles.buzzArea, styles.team1)}
